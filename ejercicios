@@ -6,4 +6,4 @@ reverseList [1, 2, 3, 4, 5]
 
 ## 2. Ejercicio 2
  let isPalindrome :: (Eq a) => [a] -> Bool; isPalindrome xs = xs == reverse xs
-isPalindrome "reconocer"
+ isPalindrome "reconocer"
