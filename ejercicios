@@ -1,0 +1,9 @@
+# Ejercicios Haskell
+
+## 1. Ejercicio 1
+let reverseList [] = []; reverseList (x:xs) = reverseList xs ++ [x]
+reverseList [1, 2, 3, 4, 5]
+
+## 2. Ejercicio 2
+ let isPalindrome :: (Eq a) => [a] -> Bool; isPalindrome xs = xs == reverse xs
+isPalindrome "reconocer"
