@@ -1,0 +1,48 @@
+-- Definición del tipo de datos para representar un producto en el inventario
+type Inventory = [(String, Double, Int)]
+
+-- Función para agregar un nuevo producto al inventario
+addProduct :: Inventory -> String -> Double -> Int -> Inventory
+addProduct inventory name price quantity = inventory ++ [(name, price, quantity)]
+
+-- Función para actualizar la cantidad de un producto existente
+updateQuantity :: Inventory -> String -> Int -> Inventory
+updateQuantity [] _ _ = []
+updateQuantity ((n,p,q):xs) name newQuantity
+    | n == name = (n, p, newQuantity) : xs
+    | otherwise = (n, p, q) : updateQuantity xs name newQuantity
+
+-- Función para eliminar un producto del inventario
+removeProduct :: Inventory -> String -> Inventory
+removeProduct [] _ = []
+removeProduct ((n,p,q):xs) name
+    | n == name = xs
+    | otherwise = (n, p, q) : removeProduct xs name
+
+-- Función para consultar el total de productos en stock y el valor total del inventario
+inventorySummary :: Inventory -> (Int, Double)
+inventorySummary inventory = (totalQuantity, totalValue)
+    where
+        totalQuantity = sum [q | (_, _, q) <- inventory]
+        totalValue = sum [p * fromIntegral q | (_, p, q) <- inventory]
+
+-- Ejemplo de uso
+main :: IO ()
+main = do
+    let inventory = [("Manzanas", 0.5, 100), ("Naranjas", 0.7, 150)]
+    
+    -- Agregar un nuevo producto
+    let inventory1 = addProduct inventory "Peras" 0.6 120
+    print inventory1
+    
+    -- Actualizar la cantidad de un producto existente
+    let inventory2 = updateQuantity inventory1 "Manzanas" 200
+    print inventory2
+    
+    -- Eliminar un producto del inventario
+    let inventory3 = removeProduct inventory2 "Naranjas"
+    print inventory3
+    
+    -- Consultar el total de productos en stock y el valor total del inventario
+    let summary = inventorySummary inventory3
+    print summary
