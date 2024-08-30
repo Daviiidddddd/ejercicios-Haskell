@@ -1,5 +1,10 @@
 # Ejercicios Haskell
 
+## Integrantes: 
+## David Castellanos
+## Santiago Cespedes
+## Diana Acosta
+
 ## 1. Ejercicio 1
 
 ```haskell
